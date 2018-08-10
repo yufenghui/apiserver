@@ -8,7 +8,7 @@ name: apiserver
 url: http://127.0.0.1:8000
 # pingServer函数try的次数
 max_ping_count: 5
-
+gormlog: true
 log:
   writers: file,stdout
   logger_level: DEBUG
@@ -18,3 +18,15 @@ log:
   log_rotate_date: 1
   log_rotate_size: 1
   log_backup_count: 7
+
+db:
+  name: db_apiserver
+  addr: 127.0.0.1:3306
+  username: root
+  password: root
+
+docker_db:
+  name: db_apiserver
+  addr: 127.0.0.1:3306
+  username: root
+  password: root

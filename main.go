@@ -3,11 +3,12 @@ package main
 import (
 	"errors"
 	"github.com/gin-gonic/gin"
+	"github.com/lexkong/log"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
 	"github.com/yufenghui/apiserver/config"
+	"github.com/yufenghui/apiserver/model"
 	"github.com/yufenghui/apiserver/router"
-	"github.com/lexkong/log"
 	"net/http"
 	"time"
 )
@@ -23,6 +24,10 @@ func main() {
 	if err := config.Init(*cfg); err != nil {
 		panic(err)
 	}
+
+	// init db
+	model.DB.Init()
+	defer model.DB.Close()
 
 	// Set gin mode.
 	gin.SetMode(viper.GetString("runmode"))
