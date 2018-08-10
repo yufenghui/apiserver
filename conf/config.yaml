@@ -1,0 +1,10 @@
+# 开发模式, debug, release, test
+runmode: debug
+# HTTP绑定端口
+addr: :8000
+# API Server的名字
+name: apiserver
+# pingServer函数请求的API服务器的ip:port
+url: http://127.0.0.1:8000
+# pingServer函数try的次数
+max_ping_count: 5
