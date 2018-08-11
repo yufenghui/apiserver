@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/lexkong/log"
+	. "github.com/yufenghui/apiserver/handler"
 	"github.com/yufenghui/apiserver/pkg/errno"
 	"net/http"
 )
@@ -11,10 +12,7 @@ import (
 // Create creates a new user account.
 func Create(c *gin.Context) {
 
-	var r struct {
-		Username string `json:"username"`
-		Password string `json:"password"`
-	}
+	var r CreateRequest
 
 	var err error
 
@@ -36,4 +34,10 @@ func Create(c *gin.Context) {
 	if r.Password == "" {
 		err = fmt.Errorf("password is empty")
 	}
+
+	resp := CreateResponse{
+		Username: r.Username,
+	}
+
+	SendResponse(c, err, resp)
 }

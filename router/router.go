@@ -1,10 +1,10 @@
 package router
 
 import (
-	"apiserver/router/middleware"
 	"github.com/gin-gonic/gin"
 	"github.com/yufenghui/apiserver/handler/sd"
 	"github.com/yufenghui/apiserver/handler/user"
+	"github.com/yufenghui/apiserver/router/middleware"
 	"net/http"
 )
 
