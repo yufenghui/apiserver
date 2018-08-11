@@ -4,6 +4,7 @@ import (
 	"apiserver/router/middleware"
 	"github.com/gin-gonic/gin"
 	"github.com/yufenghui/apiserver/handler/sd"
+	"github.com/yufenghui/apiserver/handler/user"
 	"net/http"
 )
 
@@ -20,6 +21,11 @@ func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine {
 	g.NoRoute(func(c *gin.Context) {
 		c.String(http.StatusNotFound, "Not found!")
 	})
+
+	u := g.Group("/v1/user")
+	{
+		u.POST("", user.Create)
+	}
 
 	svcd := g.Group("/sd")
 	{
