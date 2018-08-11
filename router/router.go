@@ -29,8 +29,11 @@ func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine {
 		// 删除用户
 		u.DELETE("/:id", user.Delete)
 		// 更新用户
+		u.PUT("/:id", user.Update)
 		// 用户列表
+
 		// 获取指定用户的详细信息
+		u.GET("/:username", user.Get)
 	}
 
 	svcd := g.Group("/sd")

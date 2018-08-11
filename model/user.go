@@ -28,3 +28,14 @@ func DeleteUser(id uint64) error {
 
 	return DB.Self.Delete(user).Error
 }
+
+func (u *UserModel) Update() error {
+	return DB.Self.Save(&u).Error
+}
+
+func GetUser(username string) (UserModel, error) {
+	u := UserModel{}
+	d := DB.Self.Where("username = ?", username).First(&u)
+
+	return u, d.Error
+}
