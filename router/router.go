@@ -31,7 +31,7 @@ func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine {
 		// 更新用户
 		u.PUT("/:id", user.Update)
 		// 用户列表
-
+		u.GET("", user.List)
 		// 获取指定用户的详细信息
 		u.GET("/:username", user.Get)
 	}

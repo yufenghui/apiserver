@@ -30,7 +30,7 @@ func DeleteUser(id uint64) error {
 }
 
 func (u *UserModel) Update() error {
-	return DB.Self.Save(&u).Error
+	return DB.Self.Save(u).Error
 }
 
 func GetUser(username string) (UserModel, error) {
@@ -38,4 +38,16 @@ func GetUser(username string) (UserModel, error) {
 	d := DB.Self.Where("username = ?", username).First(&u)
 
 	return u, d.Error
+}
+
+// List all users
+func List() ([]UserModel, error) {
+	users := make([]UserModel, 0)
+	err := DB.Self.Find(&users).Error
+
+	if err != nil {
+		return users, err
+	}
+
+	return users, nil
 }
