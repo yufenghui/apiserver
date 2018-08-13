@@ -22,7 +22,11 @@ func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine {
 		c.String(http.StatusNotFound, "Not found!")
 	})
 
+	// api for authentication functionalities
+	g.POST("/login", user.Login)
+
 	u := g.Group("/v1/user")
+	u.Use(middleware.AuthMiddleware())
 	{
 		// 创建用户
 		u.POST("", user.Create)
