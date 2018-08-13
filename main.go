@@ -9,6 +9,7 @@ import (
 	"github.com/yufenghui/apiserver/config"
 	"github.com/yufenghui/apiserver/model"
 	"github.com/yufenghui/apiserver/router"
+	"github.com/yufenghui/apiserver/router/middleware"
 	"net/http"
 	"time"
 )
@@ -35,12 +36,11 @@ func main() {
 	// create the Gin engine
 	g := gin.New()
 
-	middlewares := []gin.HandlerFunc{}
-
 	// Routes
 	router.Load(
 		g,
-		middlewares...,
+		middleware.RequestId(),
+		middleware.Logging(),
 	)
 
 	// Ping the server to make sure the router is working.
