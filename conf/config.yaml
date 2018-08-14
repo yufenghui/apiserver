@@ -10,6 +10,10 @@ url: http://127.0.0.1:8080
 max_ping_count: 5
 gormlog: true
 jwt_secret: Rtg8BPKNEf2mB4mgvKONGPZZQSaJWNLijxR42qRgq0iBb5
+tls:
+  addr: :8081
+  cert: conf/server.crt
+  key: conf/server.key
 log:
   writers: file,stdout
   logger_level: DEBUG

@@ -45,16 +45,25 @@ func main() {
 
 	// Ping the server to make sure the router is working.
 	go func() {
-
 		if err := pingServer(); err != nil {
 			log.Fatal("The router has no response, or it might took too long to start up.", err)
 		}
-
 		log.Info("The router has been deployed successfully.")
 	}()
 
+	// Start to listening the incoming requests.
+	cert := viper.GetString("tls.cert")
+	key := viper.GetString("tls.key")
+	if cert != "" && key != "" {
+		go func() {
+			log.Infof("Start to listening the incoming requests on https address: %s", viper.GetString("tls.addr"))
+			log.Info(http.ListenAndServeTLS(viper.GetString("tls.addr"), cert, key, g).Error())
+		}()
+	}
+
 	log.Infof("Start to listening the incoming requests on http address: %s", viper.GetString("addr"))
-	log.Infof(http.ListenAndServe(viper.GetString("addr"), g).Error())
+	log.Info(http.ListenAndServe(viper.GetString("addr"), g).Error())
+
 }
 
 func pingServer() error {
