@@ -1,6 +1,7 @@
 package router
 
 import (
+	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	"github.com/yufenghui/apiserver/handler/sd"
 	"github.com/yufenghui/apiserver/handler/user"
@@ -21,6 +22,9 @@ func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine {
 	g.NoRoute(func(c *gin.Context) {
 		c.String(http.StatusNotFound, "Not found!")
 	})
+
+	// pprof router
+	pprof.Register(g)
 
 	// api for authentication functionalities
 	g.POST("/login", user.Login)
