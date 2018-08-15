@@ -12,7 +12,13 @@ const (
 	GB = 1024 * MB
 )
 
-// HealthCheck shows `OK` as the ping-pong result.
+// @Summary Shows OK as the ping-pong result
+// @Description Shows OK as the ping-pong result
+// @Tags sd
+// @Accept  json
+// @Produce  json
+// @Success 200 {string} plain "OK"
+// @Router /sd/health [get]
 func HealthCheck(c *gin.Context) {
 	message := "OK"
 	c.String(http.StatusOK, message+"\n")
